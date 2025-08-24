@@ -1,0 +1,61 @@
+<div class="login-container">
+
+    <div class="inner-container">
+
+        <mat-card>
+            <mat-card-content>
+                <div class="form-container">
+                    <form class="form-content" [formGroup]="signInForm">
+
+                        <div class="field-container">
+                            <h1 class="title-header">Sign in to LDIS</h1>
+
+                             <mat-form-field appearance="outline" class="form-field">
+                                <mat-label>Username</mat-label>
+                                <input formControlName="username" matInput type="text" placeholder="Please enter your username">
+                                <mat-icon matSuffix>person</mat-icon>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="form-field">
+                                <mat-label>Password</mat-label>
+                                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'"
+                                    placeholder="please enter your password">
+                                <button [matTooltip]="hide ? 'show password' : 'hide password'" mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Toggle password visibility'">
+                                    <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                </button>
+                            </mat-form-field>
+
+                            <button (click)="onLogin()" mat-fab extended class="login-button">
+                                <mat-icon>login</mat-icon>
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <mat-divider [inset]="true" [vertical]="true"></mat-divider>
+                <div class="logo-container">
+                    <div class="time">
+                        <p class="time-zone">
+                            <span>
+                                Philippine Standard Time:
+                                <br>
+                                {{ today | date:'EEEE , MMMM d , y , h:mm a' }}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="middle-content">
+                        <img src="/mirdclogo.png" width="50%">
+                        <div class="title">
+                            <span>Republic of the Philippines</span>
+                            <h1 class="sub-title">Metals Industry Research and Development Center</h1>
+                            <span>Department of Science and Technology</span>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>

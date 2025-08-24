@@ -1,0 +1,81 @@
+<div class="content">
+
+  <div id="controls">
+
+    <div class="button-container">
+      <button mat-fab extended color='primary' (click)="upload()">
+        <mat-icon matPrefix style="margin-right:16px">backup</mat-icon>Upload New File
+      </button>
+      <button mat-fab extended (click)="add()"><mat-icon>add_circle</mat-icon>
+        Add Training Provider
+      </button>
+      <button mat-fab extended color="primary"><mat-icon>print</mat-icon>
+        Generate Report</button>
+
+    </div>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" #searchbox placeholder="Search keywords...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+  </div>
+  <div id="print-section">
+
+    <mat-card class="table-card">
+      <mat-card-content class="table-card-content">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 tp-table" matSort>
+
+          <!-- Training Provider Column -->
+          <ng-container matColumnDef="providerName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Training Provider </th>
+            <td mat-cell *matCellDef="let element"> {{element.providerName}} </td>
+          </ng-container>
+
+          <!-- Contact Person Column -->
+          <ng-container matColumnDef="pointofContact">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
+            <td mat-cell *matCellDef="let element"> {{element.pointofContact}} </td>
+          </ng-container>
+
+          <!-- Email Address Column -->
+          <ng-container matColumnDef="emailAdd">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email Address </th>
+            <td mat-cell *matCellDef="let element"> {{element.emailAdd}} </td>
+          </ng-container>
+
+          <!-- Contact Number Column -->
+          <ng-container matColumnDef="telNo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+          </ng-container>
+
+          <!-- Rating Column -->
+          <ng-container matColumnDef="rating">
+            <th mat-header-cell *matHeaderCellDef> Rating </th>
+            <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+          </ng-container>
+
+          <!-- Header and Row Declarations -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="details(row)" class="row"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+<mat-paginator
+  class="paginator"
+  [length]="total"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  (page)="onPaginateChange($event)">
+</mat-paginator>
+</div>

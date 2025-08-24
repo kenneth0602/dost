@@ -1,0 +1,103 @@
+<h2 matDialogTitle class="dialog-title">Add Training Provider</h2>
+
+<mat-dialog-content class="dialog-content">
+  <form class="form-container" [formGroup]="trainingProviderForm">
+
+    <div class="form-row">
+
+      <!-- Training Provider -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Training Provider</mat-label>
+        <input formControlName="providerName" matInput placeholder="Please enter training provider">
+        <mat-error *ngIf="trainingProviderForm.get('providerName')?.hasError('required')">
+          Training Provider is required
+        </mat-error>
+        <mat-error *ngIf="trainingProviderForm.get('providerName')?.hasError('disallowedCharacters')">
+          Invalid characters are not allowed
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Website -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Website</mat-label>
+        <input formControlName="website" matInput placeholder="Please enter training provider website">
+        <mat-error *ngIf="trainingProviderForm.get('website')?.hasError('required')">
+          Website is required
+        </mat-error>
+        <mat-error *ngIf="trainingProviderForm.get('website')?.hasError('disallowedCharacters')">
+          Invalid characters are not allowed
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <!-- Address -->
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Address</mat-label>
+        <input formControlName="address" matInput placeholder="Please enter training provider address">
+        <mat-error *ngIf="trainingProviderForm.get('address')?.hasError('required')">
+          Address is required
+        </mat-error>
+        <mat-error *ngIf="trainingProviderForm.get('address')?.hasError('disallowedCharacters')">
+          Invalid characters are not allowed
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Contact Person -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Contact Person</mat-label>
+        <input formControlName="pointofContact" matInput placeholder="Please enter the contact person">
+        <mat-error *ngIf="trainingProviderForm.get('pointofContact')?.hasError('required')">
+          Contact person is required
+        </mat-error>
+        <mat-error *ngIf="trainingProviderForm.get('pointofContact')?.hasError('disallowedCharacters')">
+          Invalid characters are not allowed
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Telephone Number -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Telephone Number</mat-label>
+        <input formControlName="telNo" matInput placeholder="Please enter contact person's number">
+        <mat-error *ngIf="trainingProviderForm.get('telNo')?.hasError('required')">
+          Telephone number is required
+        </mat-error>
+        <mat-error *ngIf="trainingProviderForm.get('telNo')?.hasError('nonNumeric')">
+          Only numeric values are allowed
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <!-- Mobile Number -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Mobile Number</mat-label>
+        <input formControlName="mobileNo" matInput placeholder="Please enter contact person's number">
+        <mat-error *ngIf="trainingProviderForm.get('mobileNo')?.hasError('required')">
+          Mobile number is required
+        </mat-error>
+        <mat-error *ngIf="trainingProviderForm.get('mobileNo')?.hasError('invalidCellphone')">
+          Invalid mobile number format
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Email Address -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email Address</mat-label>
+        <input formControlName="emailAdd" matInput placeholder="Please enter contact person's email">
+        <mat-error *ngIf="trainingProviderForm.get('emailAdd')?.hasError('required')">
+          Email address is required
+        </mat-error>
+        <mat-error *ngIf="trainingProviderForm.get('emailAdd')?.hasError('invalidEmail')">
+          Invalid email format
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()" style="color: red;">Close</button>
+  <button (click)="onSubmit()" mat-fab extended [disabled]="this.trainingProviderForm.invalid">Save</button>
+</mat-dialog-actions>

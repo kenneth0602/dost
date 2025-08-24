@@ -1,0 +1,22 @@
+<div id="container">
+    <div id="header">
+      <app-header (menuClickedEvent)="toggleSideNav()"></app-header>
+      <div id="topheader">
+        <app-navbar [ngClass]="sideNavVisible==true?'bottom-nav':'top-nav'"></app-navbar>
+      </div>
+    </div>
+  
+    <div id="body">
+        <div id="breadcrumbs">
+            <app-breadcrumbs></app-breadcrumbs>
+        </div>
+        <mat-drawer-container class="container">
+            <mat-drawer #sideNav mode="over" [opened]="sideNavVisible" position="end" class="drawer">
+                <app-sidecards></app-sidecards>
+            </mat-drawer>
+        <mat-drawer-content class="container-content">
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+        </mat-drawer-container>
+    </div>
+  </div>

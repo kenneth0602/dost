@@ -1,0 +1,31 @@
+<h2 matDialogTitle class="dialog-title">Add New Request</h2>
+
+<mat-dialog-content>
+    <form class="form-container" [formGroup]="unplannedCompetencyFormGroup">
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Specific LD Needs</mat-label>
+                <input formControlName="specificLDNeeds" matInput placeholder="Please enter LD Needs">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Level of Proficiency</mat-label>
+                <mat-select formControlName="levelOfProficiency" placeholder="Please select proficiency">
+                    @for (status of proficiency; track proficiency) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <button (click)="onSubmit()" mat-fab extended>Save</button>
+</mat-dialog-actions>

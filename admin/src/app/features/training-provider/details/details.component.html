@@ -1,0 +1,185 @@
+<mat-card class="header">
+    <div class="main-container">
+        <div class="img-container">
+            <img src="TRAINING-PROVIDER-DETAILS.png" alt="header-image" width="25%">
+            <div>
+                <h1 style="font-size: 25px;">{{ training_provider_data?.providerName }}</h1>
+
+                <span style="font-size: 15px;">
+                    <p style="display: flex; align-items: center;"><mat-icon>language</mat-icon>Website: {{
+                        training_provider_data?.website }}</p>
+                </span>
+
+                <span style="font-size: 15px;">
+                    <p style="display: flex; align-items: center;"><mat-icon>location_on</mat-icon>Address: {{
+                        training_provider_data?.address }}</p>
+                </span>
+            </div>
+        </div>
+        <mat-card-actions class="actions" align="end">
+            <button (click)="view()" mat-fab extended><mat-icon>edit</mat-icon>Edit</button>
+        </mat-card-actions>
+    </div>
+</mat-card>
+
+<div class="card-container">
+    <mat-card class="card-width">
+        <mat-card-header>
+            <mat-card-title>Contact Details</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <span>
+                <p>Contact Person</p>
+                <p>{{ training_provider_data?.pointofContact }}</p>
+            </span>
+            <mat-divider></mat-divider>
+            <span>
+                <p>Contact Number</p>
+                <p>{{ training_provider_data?.mobileNo }}</p>
+            </span>
+            <mat-divider></mat-divider>
+            <span>
+                <p>Provider Email</p>
+                <p>{{ training_provider_data?.emailAdd }}</p>
+            </span>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+        <mat-card-header>
+            <mat-card-title>Payment Details</mat-card-title>
+        </mat-card-header>
+
+        <mat-tab-group>
+            <mat-tab label="Active Payment Details">
+                <mat-card-actions>
+                    <button (click)="addPaymentOption()" mat-fab extended>
+                        <mat-icon>add</mat-icon>Add New Payment Option
+                    </button>
+                </mat-card-actions>
+
+                <!-- SCROLLABLE WRAPPER START -->
+                <div class="scrollable-tab-content">
+                    <ng-container *ngIf="payments_data.length > 0; else noActive">
+                        <mat-card-content *ngFor="let payment of payments_data">
+                            <mat-card style="padding: 2%; margin-bottom: 1rem;">
+                                <mat-card-header style="display: flex; justify-content: flex-end; gap: 1%;">
+                                    <button (click)="viewPaymentOption(payment)" mat-mini-fab color="primary">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button (click)="deactivatePayment(payment.paymentOptID)" mat-mini-fab style="color:#FF3F33;">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </mat-card-header>
+
+                                <span style="display: flex; flex-direction: row; align-items: center; gap: 5%;">
+                                    <b>Payment Option:</b>
+                                    <p>{{ payment.ddPaymentOpt }}</p>
+                                </span>
+                                <span style="display: flex; flex-direction: row; align-items: center; gap: 5%;">
+                                    <b>Bank/E-Wallet Name:</b>
+                                    <p>{{ payment.bankName }}</p>
+                                </span>
+                                <span style="display: flex; flex-direction: row; align-items: center; gap: 5%;">
+                                    <b>Account Number:</b>
+                                    <p>{{ payment.accountNo }}</p>
+                                </span>
+                                <span style="display: flex; flex-direction: row; align-items: center; gap: 5%;">
+                                    <b>Payee:</b>
+                                    <p>{{ payment.payee }}</p>
+                                </span>
+                            </mat-card>
+                        </mat-card-content>
+                    </ng-container>
+
+                    <!-- EMPTY STATE TEMPLATE -->
+                    <ng-template #noActive>
+                        <div style="text-align: center; padding: 2rem; color: gray;">
+                            <p style="display: flex; justify-content: center; align-items: center; gap: 5%;"><mat-icon style="color: #FF3F33;">info</mat-icon> No Active Payments</p>
+                        </div>
+                    </ng-template>
+                </div>
+                <!-- SCROLLABLE WRAPPER END -->
+            </mat-tab>
+
+
+            <mat-tab label="Inactive Payments">
+                <!-- SCROLLABLE WRAPPER START -->
+                <div class="scrollable-tab-content">
+
+                    <ng-container *ngIf="inactive_payments_data.length > 0; else noInactive">
+                        <mat-card-content *ngFor="let payment of inactive_payments_data">
+                            <mat-card style="padding: 2%; margin-bottom: 1rem; background-color: #f8f9fa;">
+                                <mat-card-header style="display: flex; justify-content: flex-end; gap: 1%;">
+                                    <button (click)="activatePayment(payment.paymentOptID)" mat-fab extended
+                                        color="primary">
+                                        <mat-icon>task_alt</mat-icon>
+                                        Enable
+                                    </button>
+                                </mat-card-header>
+
+                                <span style="display: flex; flex-direction: row; align-items: center; gap: 5%;">
+                                    <b>Payment Option:</b>
+                                    <p>{{ payment.ddPaymentOpt }}</p>
+                                </span>
+                                <span style="display: flex; flex-direction: row; align-items: center; gap: 5%;">
+                                    <b>Bank/E-Wallet Name:</b>
+                                    <p>{{ payment.bankName }}</p>
+                                </span>
+                                <span style="display: flex; flex-direction: row; align-items: center; gap: 5%;">
+                                    <b>Account Number:</b>
+                                    <p>{{ payment.accountNo }}</p>
+                                </span>
+                                <span style="display: flex; flex-direction: row; align-items: center; gap: 5%;">
+                                    <b>Payee:</b>
+                                    <p>{{ payment.payee }}</p>
+                                </span>
+                            </mat-card>
+                        </mat-card-content>
+                    </ng-container>
+
+                    <!-- EMPTY STATE TEMPLATE -->
+                    <ng-template #noInactive>
+                        <div style="text-align: center; padding: 2rem; color: gray;">
+                            <p style="display: flex; justify-content: center; align-items: center; gap: 5%;"><mat-icon
+                                    style="color: #FF3F33;">info</mat-icon> No Inactive Payment Option</p>
+                        </div>
+                    </ng-template>
+
+                </div>
+                <!-- SCROLLABLE WRAPPER END -->
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>
+
+<mat-tab-group style="margin-bottom: 2%;">
+    <mat-tab label="TRAINING PROGRAMS">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 tp-table" matSort>
+
+            <!-- Training Provider Column -->
+            <ng-container matColumnDef="programsOffered">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Programs Offered </th>
+                <td mat-cell *matCellDef="let element"> {{element.programsOffered}} </td>
+            </ng-container>
+
+            <!-- Contact Person Column -->
+            <ng-container matColumnDef="trainingSchedule">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Training Schedule </th>
+                <td mat-cell *matCellDef="let element"> {{element.trainingSchedule}} </td>
+            </ng-container>
+
+            <!-- Email Address Column -->
+            <ng-container matColumnDef="trainingFee">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Training Fee </th>
+                <td mat-cell *matCellDef="let element"> {{element.trainingFee}} </td>
+            </ng-container>
+
+            <!-- Header and Row Declarations -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row"></tr>
+        </table>
+    </mat-tab>
+    <mat-tab label="SUBJECT MATTER EXPERT"></mat-tab>
+</mat-tab-group>

@@ -1,0 +1,12 @@
+@if (isLoading) {
+<div class="loader-overlay">
+  <div class="loader">
+    <img src="mirdclogo.png" alt="ccp-logo" />
+  </div>
+  @if (message) {
+  <div>
+    <p class="message">{{ message }}</p>
+  </div>
+  }
+</div>
+}

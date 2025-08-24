@@ -1,0 +1,58 @@
+.content {
+    margin-top: 2%;
+
+    #controls {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        flex-direction: row;
+
+        .button-container {
+            width: 80%;
+            display: flex;
+            gap: 1%;
+        }
+    }
+
+    .paginator {
+        background-color: transparent;
+    }
+
+    #print-section {
+
+        .table-card {
+
+            .table-card-content {
+
+                .tp-table {
+                    background-color: transparent;
+
+                    .header {
+                        background-color: #27548A;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.status-verified {
+  color: green;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: orange;
+  font-weight: 600;
+}
+
+.status-rejected {
+  color: red;
+  font-weight: 600;
+}
+
+.status-default {
+  color: gray;
+  font-weight: 500;
+}

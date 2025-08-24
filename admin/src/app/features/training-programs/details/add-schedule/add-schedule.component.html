@@ -1,0 +1,46 @@
+<h2 matDialogTitle class="dialog-title">Add Training Schedule</h2>
+
+<mat-dialog-content>
+  <form class="form-container" [formGroup]="trainingScheduleFormGroup">
+
+    <div class="form-row">
+
+     <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Start Time</mat-label>
+        <mat-select formControlName="fromTime">
+          @for (time of timeOptions; track time) {
+            <mat-option [value]="time">{{ time }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <!-- End Time -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>End Time</mat-label>
+        <mat-select formControlName="toTime">
+          @for (time of timeOptions; track time) {
+            <mat-option [value]="time">{{ time }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Date Range Picker -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Date Filter</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" formControlName="dateFrom">
+          <input matEndDate placeholder="End date" formControlName="dateTo">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()" style="color: red;">Close</button>
+  <button (click)="onSubmit()" mat-fab extended>Save</button>
+</mat-dialog-actions>

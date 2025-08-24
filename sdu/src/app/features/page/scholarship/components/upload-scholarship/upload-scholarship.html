@@ -1,0 +1,51 @@
+<h2 matDialogTitle class="dialog-title">Add Scholarship</h2>
+
+<mat-dialog-content>
+    <form class="form-container" [formGroup]="form">
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Title</mat-label>
+                <input formControlName="title" matInput placeholder="Please enter the program">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field full-width">
+                <mat-label>Category</mat-label>
+                <input formControlName="category" matInput placeholder="Please enter training provider">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Sponsor</mat-label>
+                <input formControlName="sponsor" matInput placeholder="Please enter the program">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Participation Fee</mat-label>
+                <input formControlName="participation_fee" matInput placeholder="Please enter the program">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field full-width">
+                <mat-label>Venue</mat-label>
+                <input formControlName="venue" matInput placeholder="Please enter training provider">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <div class="upload-dropzone" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
+                (dragleave)="onDragLeave($event)" [class.dragover]="isDragOver">
+                <mat-icon fontIcon="upload_file"></mat-icon>
+                <p>Drop a file here or <a (click)="fileInput.click()">browse</a> your files</p>
+                <input #fileInput type="file" hidden (change)="onFileSelected($event)" />
+            </div>
+
+            <div *ngIf="selectedFile" style="width: 100%;">
+                <p style="text-align: center;"><strong>Selected File:</strong> {{ selectedFile.name }}</p>
+            </div>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <button mat-fab extended (click)="onUpload()"><mat-icon>check_circle</mat-icon>Save</button>
+</mat-dialog-actions>

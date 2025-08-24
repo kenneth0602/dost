@@ -1,0 +1,55 @@
+<h2 matDialogTitle class="dialog-title">Add New Request</h2>
+
+<mat-dialog-content>
+    <form class="form-container" [formGroup]="paymentOptionsForm">
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Payment Option</mat-label>
+                <mat-select formControlName="ddPaymentOpt" placeholder="Please select payment option">
+                    @for (status of payment_option; track payment_option) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row"
+            *ngIf="paymentOptionsForm.get('ddPaymentOpt')?.value === 'Bank' || paymentOptionsForm.get('ddPaymentOpt')?.value === 'E-wallet'">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>
+                    {{ paymentOptionsForm.get('ddPaymentOpt')?.value === 'Bank' ? 'Bank Name' : 'E-Wallet Name' }}
+                </mat-label>
+                <input formControlName="bankName" matInput
+                    [placeholder]="'Please enter ' + (paymentOptionsForm.get('ddPaymentOpt')?.value === 'Bank' ? 'bank' : 'e-wallet') + ' name'">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Account Number</mat-label>
+                <input formControlName="accountNo" matInput placeholder="Please enter account number">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Payee</mat-label>
+                <input formControlName="payee" matInput placeholder="Please enter payee name">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>TIN Number</mat-label>
+                <input formControlName="TIN" matInput placeholder="Please enter tin number">
+            </mat-form-field>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <button (click)="onSubmit()" mat-fab extended>Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,37 @@
+.upload-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.upload-dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-dropzone.dragover {
+  background-color: #e3f2fd;
+  border-color: #1976d2;
+}
+
+.upload-dropzone p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.upload-dropzone a {
+  color: #1976d2;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.dialog-title {
+    background-color: #27548A;
+    color: white;
+    margin-bottom: 2%;
+}

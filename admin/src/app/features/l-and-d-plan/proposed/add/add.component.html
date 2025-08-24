@@ -1,0 +1,19 @@
+<h2 matDialogTitle class="dialog-title">Add New Request</h2>
+
+<mat-dialog-content>
+    <form class="form-container" [formGroup]="proposedAldpYearFormGroup">
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Year (XXXX)</mat-label>
+                <input formControlName="aldp_year" matInput placeholder="Please enter the proposed year ">
+            </mat-form-field>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <button (click)="onSubmit()" mat-fab extended>Save</button>
+</mat-dialog-actions>

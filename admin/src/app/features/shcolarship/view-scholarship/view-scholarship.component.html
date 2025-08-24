@@ -1,0 +1,100 @@
+<h2 matDialogTitle class="dialog-title">View Scholarship</h2>
+<div class="handle-form">
+    @if (!showEmployeeSelection) {
+    <button mat-stroked-button color="primary" (click)="showAssignEmployees()">
+        Assign Employees
+    </button>
+    } @else {
+    <button mat-stroked-button color="accent" (click)="showForm()">
+        Back to Form
+    </button>
+    }
+</div>
+
+<mat-dialog-content>
+    @if(!showEmployeeSelection) {
+    <form class="form-container" [formGroup]="scholarshipForm">
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Title</mat-label>
+                <input formControlName="title" matInput placeholder="Please enter the program">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field full-width">
+                <mat-label>Category</mat-label>
+                <input formControlName="category" matInput placeholder="Please enter training provider">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Sponsor</mat-label>
+                <input formControlName="sponsor" matInput placeholder="Please enter the program">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Participation Fee</mat-label>
+                <input formControlName="participation_fee" matInput placeholder="Please enter the program">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field full-width">
+                <mat-label>Venue</mat-label>
+                <input formControlName="venue" matInput placeholder="Please enter training provider">
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="form-row">
+            <div class="upload-dropzone" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
+                (dragleave)="onDragLeave($event)" [class.dragover]="isDragOver">
+                <mat-icon fontIcon="upload_file"></mat-icon>
+                <p>Drop a file here or <a (click)="fileInput.click()">browse</a> your files</p>
+                <input #fileInput type="file" hidden (change)="onFileSelected($event)" />
+            </div>
+            @if (selectedFile) {
+            <div style="width: 100%;">
+                <p style="text-align: center;"><strong>Selected File:</strong> {{ selectedFile.name }}</p>
+            </div>
+            }
+        </div> -->
+
+    </form>
+    }
+
+    @if (showEmployeeSelection) {
+    <div>
+        <h3>Select Employees to Assign for this Scholarship</h3>
+        <table mat-table [dataSource]="employees" class="mat-elevation-z8" multiTemplateDataRows>
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="toggleSelectAll($event)" [checked]="isAllSelected()">All</mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (change)="toggleSelection(row.empID)" [checked]="isSelected(row.empID)"></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['select', 'name']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['select', 'name'];"></tr>
+        </table>
+    </div>
+    }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <ng-container>
+        @if(this.data?.status === 'enabled') {
+        <button (click)="deactivateScholarship()" mat-fab extended><mat-icon>hide_source</mat-icon>Deactivate</button>
+        } @else if(this.data?.status === 'disabled'){
+        <button (click)="activateScholarship()" mat-fab extended><mat-icon>check_circle</mat-icon>Activate</button>
+        }
+    </ng-container>
+        <button mat-fab extended  (click)="assignScholarshipToEmployees()">Assign Selected Employees</button>
+
+</mat-dialog-actions>

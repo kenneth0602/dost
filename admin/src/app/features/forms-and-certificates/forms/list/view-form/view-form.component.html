@@ -1,0 +1,118 @@
+<h2 matDialogTitle class="dialog-title">Create New Form</h2>
+
+<mat-dialog-content class="form-content" [formGroup]="formGroup">
+    <!-- Step 1 Content -->
+    <div class="form-row" style="padding-top: 2%;">
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Select Form Type</mat-label>
+            <mat-select formControlName="typeValue">
+                @for (dataSource of dataSource; track dataSource) {
+                <mat-option [disabled]="usedFormTypes.includes(dataSource.value)" [value]="dataSource.value">{{dataSource.value}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- 👉 Feedback Form -->
+    <ng-container *ngIf="formGroup.get('typeValue')?.value === 'Feedback'">
+        <mat-card style="margin-bottom: 2%;">
+        </mat-card>
+    </ng-container>
+
+    @for (field of fields; track field) {
+    <mat-card style="margin-bottom: 2%;">
+        <mat-card-content>
+            <div [formGroup]="field" class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Select Field Type</mat-label>
+                    <mat-select formControlName="selectedFieldType">
+                        @for (form of formTypes; track form) {
+                        <mat-option [value]="form.value">{{ form.value }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                @if (field.get('selectedFieldType')?.value === 'Textbox') {
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                </mat-form-field>
+                }
+
+                @if (field.get('selectedFieldType')?.value === 'Essay') {
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <textarea matInput placeholder="Question" formControlName="description"></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <textarea matInput placeholder="Answer" formControlName="correctAnswer"></textarea>
+                </mat-form-field>
+                }
+
+                @if ((field.get('selectedFieldType')?.value || '').toLowerCase() === 'radio' ||
+                field.get('selectedFieldType')?.value ===
+                'Checkbox') {
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <textarea matInput placeholder="Question" formControlName="description"></textarea>
+                </mat-form-field>
+
+                <!-- Options input list -->
+                <!-- ✅ options array -->
+                <div formArrayName="options">
+                    <ng-container *ngFor="let optionCtrl of getOptionControls(field); let i = index">
+                        <div [formGroupName]="i">
+                            <mat-form-field appearance="outline" class="form-field full-width">
+                                <input matInput placeholder="Option" formControlName="value" />
+                                <button mat-icon-button matSuffix color="warn" (click)="removeOption(field, i)"
+                                    *ngIf="getOptionControls(field).length > 1">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <!-- ✅ correctAnswer control (outside of options array) -->
+                <mat-form-field *ngIf="!isFeedbackForm" appearance="outline" class="form-field full-width"
+                    style="margin-top: 10px;">
+                    <mat-label>Correct Answer</mat-label>
+                    <mat-select [formControl]="getCorrectAnswerControl(field)">
+                        <ng-container *ngFor="let optionCtrl of getOptionControls(field)">
+                            <mat-option *ngIf="optionCtrl.get('value')?.value" [value]="optionCtrl.get('value')?.value">
+                                {{ optionCtrl.get('value')?.value }}
+                            </mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+
+                }
+                @if ((field.get('selectedFieldType')?.value || '').toLowerCase() === 'radio' ||
+                field.get('selectedFieldType')?.value ===
+                'Checkbox') {
+                <button *ngIf="!isFeedbackForm" mat-button (click)="addOption(field)">
+                    <mat-icon>add</mat-icon>Add Option
+                </button>
+                }
+
+                <!-- Points and Required -->
+                @if ((field.get('selectedFieldType')?.value || '').toLowerCase() === 'radio' ||
+                field.get('selectedFieldType')?.value ===
+                'Checkbox' || field.get('selectedFieldType')?.value === 'Essay') {
+                <div style="display: flex; flex-direction: row; gap: 5%; align-items: center;">
+                    <mat-slide-toggle *ngIf="!isFeedbackForm" formControlName="required">Required</mat-slide-toggle>
+                    <mat-form-field *ngIf="!isFeedbackForm" appearance="outline" class="form-field">
+                        <mat-label>Points</mat-label>
+                        <input matInput type="number" formControlName="points" />
+                    </mat-form-field>
+                </div>
+                }
+            </div>
+        </mat-card-content>
+    </mat-card>
+    }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button color="warn" (click)="onClose()" style="color: red;">Close</button>
+    <button mat-button (click)="addField()"><mat-icon>add</mat-icon>Add New Field</button>
+    <button mat-button (click)="submitForm()"><mat-icon>task_alt</mat-icon>Submit</button>
+</mat-dialog-actions>

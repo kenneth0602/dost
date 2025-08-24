@@ -1,0 +1,71 @@
+<div class="content">
+
+    <div id="controls">
+
+        <div class="button-container">
+        </div>
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Search</mat-label>
+            <input matInput type="text" #searchbox placeholder="Search keywords...">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+    </div>
+    <div id="print-section">
+
+        <mat-card class="table-card">
+            <mat-card-content class="table-card-content">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 tp-table" matSort>
+
+                    <ng-container matColumnDef="providerName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Provider Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.providerName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="programName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Program </th>
+                        <td mat-cell *matCellDef="let element"> {{element.programName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dateFrom">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date From </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dateFrom}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dateTo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date To </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dateTo}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fromTime">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> From Time </th>
+                        <td mat-cell *matCellDef="let element"> {{element.fromTime}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="toTime">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> To Time </th>
+                        <td mat-cell *matCellDef="let element"> {{element.toTime}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cost">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cost </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row" (click)="viewFormsList(row)"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+      <mat-paginator
+        class="paginator"
+        [length]="total"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="onPaginateChange($event)"
+      >
+      </mat-paginator>
+</div>

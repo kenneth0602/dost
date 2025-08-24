@@ -1,0 +1,371 @@
+<div class="content">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Forms">
+            <div id="controls"  *ngIf="formsDataSource.length">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Search</mat-label>
+                    <input matInput type="text" #searchbox placeholder="Search keywords..." />
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <div id="print-section">
+                <mat-card class="table-card">
+                    <mat-card-content class="table-card-content">
+                        <ng-container *ngIf="formsDataSource.length > 0; else noData">
+                            <table mat-table [dataSource]="formsDataSource" class="mat-elevation-z1 tp-table" matSort>
+                                <ng-container matColumnDef="type">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Form Type
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="createdOn">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Date Created
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.createdOn }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="noOfResponse">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        No. of Response
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.noOfResponse }}
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedFormsColumns" class="header"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedFormsColumns" class="row"
+                                    (click)="rowClicked(row)">
+                                </tr>
+                            </table>
+                        </ng-container>
+                        <ng-template #noData>
+                            <div style="text-align: center; padding: 2rem; color: #999; font-size: 1.1rem; ">
+                                <img src="/empty-box.png" alt="no-data" width="auto">
+                                <p>No data available</p>
+                            </div>
+                        </ng-template>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator>
+        </mat-tab>
+
+        <mat-tab label="Forms Response">
+            <div id="controls">
+                <div class="button-container">
+                </div>
+                <mat-form-field *ngIf="responseDataSource.data && responseDataSource.data.length" appearance="outline"
+                    class="form-field">
+                    <mat-label>Search</mat-label>
+                    <input matInput type="text" #searchbox placeholder="Search keywords..." />
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+
+            <div id="print-section">
+                <mat-card class="table-card">
+                    <mat-card-content class="table-card-content">
+                        <ng-container
+                            *ngIf="responseDataSource.data && responseDataSource.data.length > 0; else noFormsResponse">
+                            <table mat-table [dataSource]="responseDataSource" class="mat-elevation-z1 tp-table"
+                                matSort>
+                                <ng-container matColumnDef="type">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Form Type
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.type }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="user_total_points">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Score
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.user_total_points }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="dateAnswered">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Date Answered
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.dateAnswered }}
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedResponseColumns" class="header"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedResponseColumns" class="row"></tr>
+                            </table>
+                        </ng-container>
+                        <ng-template #noFormsResponse>
+                            <div style="text-align: center; padding: 2rem; color: #999; font-size: 1.1rem; ">
+                                <img src="/empty-box.png" alt="no-data" width="auto">
+                                <p>No data available</p>
+                            </div>
+                        </ng-template>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <mat-paginator *ngIf="responseDataSource.data && responseDataSource.data.length" class="paginator"
+                [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator>
+        </mat-tab>
+
+        <mat-tab label="Notice of Participation">
+            <div id="controls">
+                <div class="button-container">
+                    <p *ngIf="ntpDataSource.data && ntpDataSource.data.length">Due: </p>
+                </div>
+                <mat-form-field *ngIf="ntpDataSource.data && ntpDataSource.data.length" appearance="outline"
+                    class="form-field">
+                    <mat-label>Search</mat-label>
+                    <input matInput type="text" #searchbox placeholder="Search keywords..." />
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <div id="print-section">
+                <mat-card class="table-card">
+                    <mat-card-content class="table-card-content">
+                        <ng-container *ngIf="ntpDataSource.data && ntpDataSource.data.length > 0; else noData">
+                            <table mat-table [dataSource]="ntpDataSource" class="mat-elevation-z1 tp-table" matSort>
+                                <ng-container matColumnDef="email">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Email
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="fullName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Full Name
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.lastname }}, {{element.firstname}} {{element.middle_name}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="divName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        M.I Division
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.divName }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="participant_confirmation">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Participant Confirmation
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{ element.participant_confirmation }}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="date_of_filling_out">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Date of Filling-Out
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.date_of_filling_out }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="divchiefName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Division Chief
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.divchiefName }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="divchief_approval">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        DivChief Approval
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{ element.divchief_approval }}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="remarks">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Remarks
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.remarks }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="approved_date">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Approved Date
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.approved_date }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <button mat-icon-button color="primary" (click)="openConfirmDialog(element)">
+                                            <mat-icon style="color: green;">check_circle</mat-icon>
+                                        </button>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedNtpColumns" class="header"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedNtpColumns" class="row"></tr>
+                            </table>
+                        </ng-container>
+
+                        <ng-template #noData>
+                            <div style="text-align: center; padding: 2rem; color: #999; font-size: 1.1rem; ">
+                                <img src="/empty-box.png" alt="no-data" width="auto">
+                                <p>No data available</p>
+                            </div>
+                        </ng-template>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <mat-paginator *ngIf="ntpDataSource.data && ntpDataSource.data.length" class="paginator"
+                [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator>
+        </mat-tab>
+
+        <ng-template #confirmDialog let-data>
+            <div style="min-width: 300px; padding: 0;">
+                <div mat-dialog-title
+                    style="display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 0;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <mat-icon color="warn">help_outline</mat-icon>
+                        <span class="text-lg font-medium">Confirm Participation</span>
+                    </div>
+                    <button mat-icon-button mat-dialog-close aria-label="Close">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+
+                <mat-dialog-content style="padding: 16px; font-size: 14px; line-height: 1.5;">
+                    Are you sure <strong>{{ data.lastname }}, {{ data.firstname }} {{ data.middle_name }}</strong> is a
+                    participant?
+                    <br /><br />
+                    This action cannot be undone.
+                </mat-dialog-content>
+
+                <mat-dialog-actions align="end" style="padding: 8px 16px 16px;">
+                    <button mat-button mat-dialog-close="decline" color="warn" style="margin-right: 8px; color: red;">
+                        <mat-icon>cancel</mat-icon> Decline
+                    </button>
+
+                    <button mat-raised-button color="accent" [mat-dialog-close]="'approve'">
+                        <mat-icon>check_circle</mat-icon> Approve
+                    </button>
+                </mat-dialog-actions>
+            </div>
+        </ng-template>
+
+        <mat-tab label="Registration">
+            <div id="controls" >
+                <div class="button-container">
+                    <button (click)="onClickRegistration()" mat-fab extended>
+                        <mat-icon>add_circle</mat-icon>
+                        Registration Form
+                    </button>
+                </div>
+                <mat-form-field *ngIf="registrationDataSource.data && registrationDataSource.data.length" appearance="outline" class="form-field">
+                    <mat-label>Search</mat-label>
+                    <input matInput type="text" #searchbox placeholder="Search keywords..." />
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <div id="print-section">
+                <mat-card class="table-card">
+                    <mat-card-content class="table-card-content">
+                        <ng-container
+                            *ngIf="registrationDataSource.data && registrationDataSource.data.length > 0; else noData">
+                            <table mat-table [dataSource]="registrationDataSource" class="mat-elevation-z1 tp-table"
+                                matSort>
+                                <ng-container matColumnDef="email">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Email
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="fullName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Full Name
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.l_name }}, {{element.f_name}} {{element.m_name}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="sex">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Sex
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.sex }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="division">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Division
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{ element.division }}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="employment_status">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Employment Status
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.employment_status }}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="consent">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Photo/Video Consent
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.consent }}
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedRegistrationColumns" class="header"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedRegistrationColumns" class="row">
+                                </tr>
+                            </table>
+                        </ng-container>
+
+                        <ng-template #noData>
+                            <div style="text-align: center; padding: 2rem; color: #999; font-size: 1.1rem; ">
+                                <img src="/empty-box.png" alt="no-data" width="auto">
+                                <p>No data available</p>
+                            </div>
+                        </ng-template>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <mat-paginator *ngIf="registrationDataSource.data && registrationDataSource.data.length" class="paginator"
+                [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+            </mat-paginator>
+        </mat-tab>
+    </mat-tab-group>
+</div>

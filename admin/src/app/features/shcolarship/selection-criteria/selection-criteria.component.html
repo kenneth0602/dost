@@ -1,0 +1,100 @@
+<!-- selection-criteria-dialog.component.html -->
+<h2 mat-dialog-title>Selection Criteria</h2>
+
+<form mat-dialog-content [formGroup]="form" class="criteria-content">
+  <!-- Program selector -->
+  <div class="program-row">
+    <div class="program-label">
+      <mat-icon>school</mat-icon>
+      <span>Program</span>
+    </div>
+
+    <!-- Segmented control -->
+    <mat-button-toggle-group formControlName="programType" class="program-toggle" appearance="legacy">
+      <mat-button-toggle value="Grad">Graduate Degree</mat-button-toggle>
+      <mat-button-toggle value="NonDeg">Non-Degree</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Criteria grid -->
+  <div class="criteria-grid">
+    <!-- Relevance -->
+    <mat-card class="criteria-card">
+      <mat-card-header>
+        <mat-card-title>Relevance of the Program</mat-card-title>
+        <mat-card-subtitle>How aligned is the program with the role/organization</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-radio-group formControlName="relevance" class="options">
+          <mat-radio-button value="duties">Relevant to duties & responsibilities</mat-radio-button>
+          <mat-radio-button value="division">Relevant to Division functions</mat-radio-button>
+          <mat-radio-button value="mandate">Relevant to Center’s mandate</mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Performance -->
+    <mat-card class="criteria-card">
+      <mat-card-header>
+        <mat-card-title>Performance Evaluation (last 2 ratings)</mat-card-title>
+        <mat-card-subtitle>Recent performance consistency</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-radio-group formControlName="performance" class="options">
+          <mat-radio-button value="OO">Two “O” ratings</mat-radio-button>
+          <mat-radio-button value="O_VS">One “O” and one “VS”</mat-radio-button>
+          <mat-radio-button value="VS_VS">Two “VS” ratings</mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Frequency (disabled for Grad) -->
+    <mat-card class="criteria-card" [class.disabled]="isGrad">
+      <mat-card-header>
+        <mat-card-title>Frequency of Availment</mat-card-title>
+        <mat-card-subtitle *ngIf="isGrad; else freqHelp">Not applicable for Graduate Degree</mat-card-subtitle>
+        <ng-template #freqHelp>
+          <mat-card-subtitle>Applicable to Non-Degree only</mat-card-subtitle>
+        </ng-template>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-radio-group formControlName="frequency" class="options" [disabled]="isGrad">
+          <mat-radio-button value="none">Not a recipient of any non-degree program</mat-radio-button>
+          <mat-radio-button value="other">Recipient of other non-degree program</mat-radio-button>
+          <mat-radio-button value="similar">Recipient of similar non-degree program</mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Transfer -->
+    <mat-card class="criteria-card">
+      <mat-card-header>
+        <mat-card-title>Capability to Transfer Knowledge</mat-card-title>
+        <mat-card-subtitle>Ability to share/apply learning</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-radio-group formControlName="transfer" class="options">
+          <mat-radio-button value="effectiveVS">Has exhibited effectiveness as resource speaker (≥ “VS”)</mat-radio-button>
+          <mat-radio-button value="tapped">Has been tapped as resource speaker</mat-radio-button>
+          <mat-radio-button value="capable">Can be tapped / can share & apply in workplace</mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</form>
+
+<!-- Sticky footer with live total -->
+<div class="dialog-footer">
+  <div class="summary" aria-live="polite">
+    <mat-icon>equalizer</mat-icon>
+    <span>Total score:</span>
+    <strong>{{ preview.total }}</strong>
+    <span class="hint" *ngIf="isGrad">Frequency is not counted for Graduate Degree</span>
+  </div>
+  <div class="actions">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="confirm()" [disabled]="form.invalid">Use these scores</button>
+  </div>
+</div>

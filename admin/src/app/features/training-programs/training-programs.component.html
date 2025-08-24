@@ -1,0 +1,144 @@
+<div class="content">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Available">
+      <div id="controls">
+        <div class="button-container">
+          <button mat-fab extended (click)="add()">
+            <mat-icon>add_circle</mat-icon>
+            Add New Program
+          </button>
+        </div>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Search</mat-label>
+          <input
+            matInput
+            type="text"
+            #searchbox
+            placeholder="Search keywords..."
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div id="print-section">
+        <mat-card class="table-card">
+          <mat-card-content class="table-card-content">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              class="mat-elevation-z1 tp-table"
+              matSort
+            >
+              <ng-container matColumnDef="programName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Program
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.programName }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Description
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.description }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Status
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+              </ng-container>
+
+              <tr
+                mat-header-row
+                *matHeaderRowDef="displayedColumns"
+                class="header"
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="details(row)" class="row"></tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <mat-paginator
+        class="paginator"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </mat-tab>
+
+    <mat-tab label="Availed Programs">
+      <div id="controls">
+        <div class="button-container"></div>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Search</mat-label>
+          <input
+            matInput
+            type="text"
+            #searchbox
+            placeholder="Search keywords..."
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div id="print-section">
+        <mat-card class="table-card">
+          <mat-card-content class="table-card-content">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              class="mat-elevation-z1 tp-table"
+              matSort
+            >
+              <ng-container matColumnDef="programName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Program
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.programName }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Description
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.description }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Status
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+              </ng-container>
+
+              <tr
+                mat-header-row
+                *matHeaderRowDef="displayedColumns"
+                class="header"
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="details(row)" class="row"></tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <mat-paginator
+        class="paginator"
+        [length]="total"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="onPaginateChange($event)"
+      >
+      </mat-paginator>
+    </mat-tab>
+  </mat-tab-group>
+</div>

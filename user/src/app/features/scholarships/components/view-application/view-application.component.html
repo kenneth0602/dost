@@ -1,0 +1,195 @@
+<h2 matDialogTitle class="dialog-title">Apply for {{this.data.programName}}</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="form" class="form-container">
+        
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Full Name</mat-label>
+                <input matInput placeholder="Please enter your full name" formControlName="fullName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Sex</mat-label>
+                <mat-select placeholder="Please select" formControlName="sex">
+                    @for (status of sex; track sex) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }   
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Choose date of birth</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" (dateChange)="calculateAge()">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Age</mat-label>
+                <input formControlName="age" [value]="form.get('age')?.value" matInput readonly>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Position</mat-label>
+                <input formControlName="position" matInput placeholder="Please enter contact person's number">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Division/Section</mat-label>
+                <input formControlName="division" matInput placeholder="Please enter contact person's email">
+            </mat-form-field>
+        </div>
+        <div style="border: 1px solid black; padding: 2%;">
+            <p style="font-weight: 600;">Contact Information</p>
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Office</mat-label>
+                    <input formControlName="office" matInput placeholder="Please enter your office address">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Mobile No.</mat-label>
+                    <input formControlName="mobile" matInput placeholder="Please enter mobile number">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Residence</mat-label>
+                    <input formControlName="residence" matInput placeholder="Please enter your residence">
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Email Address</mat-label>
+                    <input formControlName="email" matInput placeholder="Please enter your email address">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Mailing Address</mat-label>
+                    <input formControlName="mailingAddress" matInput placeholder="Please enter your mailing address">
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Brief Description of Present Duties</mat-label>
+                <textarea formControlName="presentDuties" matInput type="text" placeholder="Please enter the description"> </textarea>
+            </mat-form-field>
+        </div>
+
+        <div style="border: 1px solid black; padding: 2%;">
+            <p style="font-weight: 600;">Chronological List of Positions Held in the Organization</p>
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Period</mat-label>
+                    <input formControlName="period" matInput placeholder="Please enter your organization period">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Position</mat-label>
+                    <input formControlName="previousPosition" matInput placeholder="Please enter your position">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Agency</mat-label>
+                    <input formControlName="agency" matInput placeholder="Please enter your agency">
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div style="border: 1px solid black; padding: 2%;">
+            <p style="font-weight: 600;">Education Background</p>
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Name of Institution</mat-label>
+                    <input formControlName="institution" matInput placeholder="Please enter the institution">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Year Graduated</mat-label>
+                    <mat-select formControlName="yearGraduated">
+                        @for (year of graduatedYears; track year) {
+                        <mat-option [value]="year">{{ year }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Degree</mat-label>
+                    <input formControlName="degree" matInput placeholder="Please enter your degree">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Scholarship/Honor Received</mat-label>
+                    <input formControlName="scholarshipReceived" matInput placeholder="Please enter your scholarship">
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Field of Study</mat-label>
+                <mat-select formControlName="fieldOfStudy" placeholder="Please select proficiency">
+                    @for (status of study; track study) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Preferred School</mat-label>
+                <mat-select formControlName="preferredSchool" [(value)]="selectedSchool" placeholder="Please select proficiency">
+                    @for (status of school; track status.value) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+        <div class="form-row" *ngIf="selectedSchool === 'Others (Specify)'">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Specify Other Preferred School</mat-label>
+                <textarea formControlName="otherPreferredSchool" matInput type="text"> </textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Option</mat-label>
+                <mat-select formControlName="option" [(value)]="selectedSchool" placeholder="Please select proficiency">
+                    @for (status of option; track status.value) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Scholarship Type</mat-label>
+                <mat-select formControlName="scholarshipType" [(value)]="selectedScholarship" placeholder="Please select proficiency">
+                    @for (status of type; track status.value) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+                <div class="form-row" *ngIf="selectedScholarship === 'Others (Specify)'">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Specify Other Scholarship</mat-label>
+                <textarea formControlName="otherScholarship" matInput type="text"> </textarea>
+            </mat-form-field>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <button mat-button color="warn" (click)="cancelScholarship()">Cancel Scholarship Application</button>
+    <button mat-fab extended (click)="applyScholarship()">Update applied Scholarship</button>
+</mat-dialog-actions>

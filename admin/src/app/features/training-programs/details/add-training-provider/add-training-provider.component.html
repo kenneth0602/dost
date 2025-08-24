@@ -1,0 +1,27 @@
+<h2 matDialogTitle class="dialog-title">Add New Program</h2>
+
+<mat-dialog-content>
+    <form class="form-container" [formGroup]="trainingProgramFormGroup">
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Training Providery</mat-label>
+              <mat-select formControlName="provID" placeholder="Please select training provider">
+                  @for (status of dataSource; track status.provID) {
+                  <mat-option [value]="status.provID">{{status.providerName}}</mat-option>
+                  }
+              </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Training Fee</mat-label>
+            <input formControlName="cost" matInput placeholder="Please enter the program name ">
+        </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <button (click)="onSubmit()" mat-fab extended>Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,28 @@
+.dialog-title {
+    background-color: #27548A;
+    color: white;
+    margin-bottom: 2%;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.form-field {
+    flex: 1;
+    min-width: 200px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+

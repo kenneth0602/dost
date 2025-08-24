@@ -1,0 +1,89 @@
+.header {
+
+    background: rgb(13,78,134);
+    background: linear-gradient(90deg, rgba(13,78,134,1) 42%, rgba(0,152,164,1) 100%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 90px;
+    top: 0;
+    z-index: 10;
+    position: fixed;
+
+    #title {
+
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+
+        #title mat-icon{
+            color: white !important;
+        }
+
+        .logo {
+            height: 100%;
+            align-items: center;
+            padding-left: 16px;
+
+            img {
+                width: 90px;
+                height:95%;
+                object-fit:cover;
+            }
+        }
+
+        #description {
+
+            p {
+                display: block;
+                margin-block-start: 0;
+                margin-block-end: 0;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+                line-height: 1.2;
+            }
+
+            .tag {
+                padding-left: 16px;
+                font-size:11px;
+                color: white;
+                font-weight: 50;
+            }
+
+            .name {
+                padding-left: 16px;
+                font-size: large;
+                color: white;
+                margin: 0px !important;
+            }
+
+        }
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+
+        mat-icon {
+            color: white;
+            z-index: 5;
+        }
+
+        .mat-divider.mat-divider-vertical {
+            height: 45px;
+            margin:16px;
+            border-top: 0;
+            border-right-width: 1px; 
+            background-color: white;
+        }
+
+        .time-container {
+
+            .time {
+                color: white;
+                font-size: small;
+
+            }
+        }
+    }
+}

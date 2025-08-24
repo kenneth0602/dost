@@ -1,0 +1,72 @@
+<mat-card class="header">
+    <div class="main-container">
+        <div class="img-container">
+            <img src="SME-DETAILS.png" alt="header-image" width="25%">
+            <div>
+                <h1 style="font-size: 25px;">{{ sme_data?.firstname }} {{sme_data?.middlename}} {{sme_data?.lastname    }}</h1>
+
+                <span style="font-size: 15px;">
+                    <p style="display: flex; align-items: center;"><mat-icon>lan</mat-icon>Area of Expertise: {{
+                        sme_data?.areaOfExpertise }}</p>
+                </span>
+
+                <span style="font-size: 15px;">
+                    <p style="display: flex; align-items: center;"><mat-icon>attach_money</mat-icon>Honoraria Rate: {{
+                        sme_data?.honorariaRate }}</p>
+                </span>
+            </div>
+        </div>
+        <mat-card-actions class="actions" align="end">
+            <button (click)="view()" mat-fab extended><mat-icon>edit</mat-icon>Edit</button>
+        </mat-card-actions>
+    </div>
+</mat-card>
+
+<div class="card-container">
+<mat-card class="card-width">
+    <mat-card-header>
+        <mat-card-title>General Details</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <span>
+            <p>Source</p>
+            <p>{{ sme_data?.resource }}</p>
+        </span>
+        <mat-divider></mat-divider>
+        <span>
+            <p>Name of Company</p>
+            <p>{{ sme_data?.companyName }}</p>
+        </span>
+        <mat-divider></mat-divider>
+        <span>
+            <p>Other Affiliations</p>
+            <p>{{ sme_data?.affiliation }}</p>
+        </span>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="card-width">
+    <mat-card-header>
+        <mat-card-title>Contact Details</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <span>
+            <p>Contact Number</p>
+            <p>Mobile Number: {{ sme_data?.mobileNo }}</p>
+            <p>Telephone Number: {{ sme_data?.telNo }}</p>
+        </span>
+        <mat-divider></mat-divider>
+        <span>
+            <p>Email Address: {{ sme_data?.emailAdd }}</p>
+        </span>
+        <mat-divider></mat-divider>
+        <span>
+            <p>FB Messenger or Viber Account</p>
+            <p>Facebook Messenger: {{ sme_data?.fbMessenger }}</p>
+            <p>Viber Account: {{ sme_data?.viberAccount }}</p>
+        </span>
+    </mat-card-content>
+</mat-card>
+</div>

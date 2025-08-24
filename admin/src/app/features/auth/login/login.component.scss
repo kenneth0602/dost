@@ -1,0 +1,111 @@
+.login-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/bg.jpeg');
+    background-size: cover;
+
+    .inner-container {
+        width: 50%;
+        height: 65%;
+
+        .mat-mdc-card {
+            height: 100%;
+
+            .mat-mdc-card-content {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                padding: 0;
+                
+                .mat-divider.mat-divider-inset {
+                    margin: 0;
+                }
+
+                .logo-container {
+                    width: 60%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    background-color: #0D4E86;
+                    padding: 1rem 0;
+
+                    .time {
+                        width: 100%;
+                        text-align: center;
+
+                        .time-zone {
+                            color: white;
+                            margin-bottom: 1rem;
+                        }
+                    }
+
+                    .middle-content {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                    img {
+                        max-width: 80%;
+                        height: auto;
+                    }
+
+                    .title {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        color: white;
+                        margin-top: 1rem;
+
+                        .sub-title {
+                            margin: 0;
+                            font-size: 21px;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+
+                .form-container {
+                    height: 100%;
+                    width: 40%;
+
+                    .form-content {
+                        height: 100%;
+                        width: 100%;
+
+                        .field-container {
+                            display: flex;
+                            flex-direction: column;
+                            height: 100%;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 5%;
+
+                            .title-header {
+                                width: 100%;
+                                font-size: x-large;
+                                margin-bottom: 15%;
+                            }
+
+                            .form-field, .login-button {
+                                width: 100%;
+                            }
+
+                            .mat-mdc-fab {
+                                background-color: #3f51b5;
+                                color: white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+#nav {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background: rgb(252, 252, 252);
+    position: fixed;
+    z-index: 999;
+
+    #navigation {
+
+        button {
+            font-size: 14px;
+            margin-top: 12px;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding-top: 9px;
+            padding-bottom: 10px;
+        }
+
+        button:hover {
+            background: rgb(54,101,149);
+            background: linear-gradient(90deg, rgba(54,101,149,0.6001751042213761) 0%, rgba(37,68,133,0.5973739837731968) 100%);
+            color: white;
+            padding-top: 9px;
+            padding-bottom: 10px;
+            border-radius: 1rem;
+        }
+    }
+}

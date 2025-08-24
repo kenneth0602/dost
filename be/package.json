@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "audit-log": "^0.9.1",
+    "bcrypt": "^5.0.1",
+    "convert-csv-to-json": "^1.3.3",
+    "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
+    "express": "^4.18.1",
+    "express-json-validator-middleware": "^3.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.9.15",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0"
+  },
+  "name": "dost_mirdc_v8_07222022",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

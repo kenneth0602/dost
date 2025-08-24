@@ -1,0 +1,58 @@
+const env = require('../../../config/db.config');
+const sql = require('mysql');
+
+const pool = sql.createPool({
+    host: env.hostname,
+    user: env.user,
+    port: env.port,
+    password: env.password,
+    database: env.db
+});
+const handler = (event,callback) => {
+    console.log(event.query)
+
+    let username = event.user.username;
+    const divID = event.params.divID;
+    const pageNo = event.query.pageNo;
+    const pageSize = event.query.pageSize;
+    const keyword = event.query.keyword;
+    const status = event.query.status;
+    //console.log(divID,pageNo,pageSize);
+
+    const query = `call divChief_getAllRejectedRequestByDivID(${divID},${pageNo},${pageSize}, '${keyword}' );`;
+
+    pool.getConnection((err,connection) => {
+        if(err) {
+
+            console.log(err);
+            callback.send(null,{message: 'Connection error occured.'});
+        }
+        connection.query(`SELECT empID FROM users WHERE username ='${username}'`, (err, result) => {
+            if(err) return err;
+            console.log('id:', result[0].empID);
+            connection.query(`INSERT INTO audit_logs(username, target, action) VALUES('${username}', 'All rejected request for Competency', 'View');`, (err1, result1) => {
+                if(err1) {
+                    console.log(err1);
+                    callback.status(400).send({message: 'Issue Encoutered'});
+                }
+                else {
+                connection.query(query, (error,results,fields) => {
+                    connection.release();
+                    if(error) {
+                        console.log(error);
+                        callback.status(400).send({message : 'Something went wrong.'});
+                    }
+                    else if(results == '') {
+                        callback.status(204).send({})
+                    }
+                    else {
+                        callback.status(200).send({message: 'Successfully retrieved data', results});
+                    }
+                });
+            }
+            })
+        });
+    });
+}
+
+module.exports = handler;

@@ -1,0 +1,75 @@
+<h2 matDialogTitle class="dialog-title">Add New Program</h2>
+
+<mat-dialog-content>
+    <form class="form-container" [formGroup]="registraionFormGroup">
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput placeholder="Please enter Email ">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>First Name</mat-label>
+                <input formControlName="f_name" matInput placeholder="Please enter Email ">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Last Name</mat-label>
+                <input formControlName="l_name" matInput placeholder="Please enter Email ">
+            </mat-form-field>
+
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Middle Name</mat-label>
+                <input formControlName="m_name" matInput placeholder="Please enter Email ">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Sex</mat-label>
+                <mat-select formControlName="sex" placeholder="Please select your gender">
+                    @for (status of sex; track status.value) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Employment Status</mat-label>
+                <mat-select formControlName="employment_status" placeholder="Please select your employment status">
+                    @for (status of employmentStatus; track status.value) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Division</mat-label>
+                <mat-select formControlName="division" placeholder="Please select your division">
+                    @for (status of division; track status.value) {
+                    <mat-option [value]="status.value">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Video Consent</mat-label>
+                <mat-select formControlName="photoVideoConsent" placeholder="Please select your division">
+                    @for (status of videoConsent; track status.value) {
+                    <mat-option [value]="status.value">{{status.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button (click)="onClose()" mat-button style="color: red;">Close</button>
+    <button (click)="onSubmit()" mat-fab extended>Save</button>
+</mat-dialog-actions>

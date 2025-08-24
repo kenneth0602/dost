@@ -1,0 +1,136 @@
+<!-- signatories-dialog.component.html -->
+<h2 mat-dialog-title>Signatories</h2>
+
+<form mat-dialog-content [formGroup]="form" class="sig-content">
+  <!-- Chairperson -->
+  <div class="row two" formGroupName="chair">
+    <mat-form-field appearance="outline">
+      <mat-label>Chairperson (FAD) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('chair.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Vice-Chairperson -->
+  <div class="row two" formGroupName="vice">
+    <mat-form-field appearance="outline">
+      <mat-label>Vice-Chairperson (FAD-AGSS) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('vice.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Members (fixed) -->
+  <div class="row two" formGroupName="atd">
+    <mat-form-field appearance="outline">
+      <mat-label>Member (ATD) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('atd.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="row two" formGroupName="mprd">
+    <mat-form-field appearance="outline">
+      <mat-label>Member (MPRD) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('mprd.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="row two" formGroupName="pd">
+    <mat-form-field appearance="outline">
+      <mat-label>Member (PD) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('pd.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="row two" formGroupName="pmd">
+    <mat-form-field appearance="outline">
+      <mat-label>Member (PMD) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('pmd.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="row two" formGroupName="tdd">
+    <mat-form-field appearance="outline">
+      <mat-label>Member (TDD) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('tdd.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="row two" formGroupName="tsss">
+    <mat-form-field appearance="outline">
+      <mat-label>Member (TSSS) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('tsss.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="row two" formGroupName="rfr">
+    <mat-form-field appearance="outline">
+      <mat-label>Member (Rank and File Representative) — Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('rfr.name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" readonly />
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Date -->
+  <div class="row one">
+    <mat-form-field appearance="outline">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="dp" formControlName="date" />
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp></mat-datepicker>
+    </mat-form-field>
+  </div>
+</form>
+
+<div mat-dialog-actions align="end" class="sig-actions">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="confirm()" [disabled]="form.invalid">Save</button>
+</div>

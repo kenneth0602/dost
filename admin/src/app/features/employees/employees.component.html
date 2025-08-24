@@ -1,0 +1,61 @@
+<div class="content">
+
+    <div id="controls">
+
+        <div class="button-container">
+            <button mat-fab extended (click)="add()"><mat-icon>add_circle</mat-icon>
+                Add Employee
+            </button>
+
+        </div>
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Search</mat-label>
+            <input matInput type="text" #searchbox placeholder="Search keywords...">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+    </div>
+    <div id="print-section">
+
+        <mat-card class="table-card">
+            <mat-card-content class="table-card-content">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 tp-table" matSort>
+
+                    <ng-container matColumnDef="Name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="emailAdd">
+                        <th mat-header-cell *matHeaderCellDef> Email Address </th>
+                        <td mat-cell *matCellDef="let element"> {{element.emailAdd}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="contactNo">
+                        <th mat-header-cell *matHeaderCellDef> Contact No. </th>
+                        <td mat-cell *matCellDef="let element"> {{element.contactNo}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="division">
+                        <th mat-header-cell *matHeaderCellDef> Division </th>
+                        <td mat-cell *matCellDef="let element"> {{element.division}} </td>
+                    </ng-container>
+
+                    <!-- Status Column -->
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+
+                    <!-- Header and Row Declarations -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+    <mat-paginator class="paginator" [pageSizeOptions]="[5,10,25,100]" aria-label="Select page">
+    </mat-paginator>
+</div>

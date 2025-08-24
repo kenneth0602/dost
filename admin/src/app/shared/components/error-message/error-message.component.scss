@@ -1,0 +1,26 @@
+.card {
+  max-width: 25em;
+  background-color: var(--secondary);
+}
+
+.red {
+  color: red;
+  display: flex;
+  column-gap: 0.5em;
+  align-items: center;
+  padding: 1em 1em 0;
+  margin-bottom: 0em;
+}
+
+.flex-end {
+  justify-content: flex-end;
+  color: var(--gray);
+}
+
+.content {
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  margin: 1em;
+  padding: 0;
+}

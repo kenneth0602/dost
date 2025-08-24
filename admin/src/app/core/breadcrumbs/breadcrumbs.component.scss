@@ -1,0 +1,62 @@
+.breadcrumb-container {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .sub-container {
+        width: 50%;
+        background-color: white;
+        padding: 8px;
+        border-radius: 1rem;
+        display: flex;
+
+        .back-button {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+
+            mat-icon {
+                margin-right: 4px;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .breadcrumb-items {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-link {
+            color: darkgrey;
+            cursor: pointer;
+
+            &:hover {
+                color: dimgrey;
+                text-decoration: none;
+            }
+
+            &.active {
+                font-weight: bold;
+                color: black;
+                cursor: default;
+            }
+        }
+
+        .separator {
+            margin: 0 8px;
+            color: darkgrey;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+.content {
+    margin-top: 2%;
+
+    #controls {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        flex-direction: row;
+
+        .button-container {
+            width: 80%;
+            display: flex;
+            gap: 1%;
+        }
+    }
+
+    .paginator {
+        background-color: transparent;
+    }
+
+    #print-section {
+
+        .table-card {
+
+            .table-card-content {
+
+                .tp-table {
+                    background-color: transparent;
+
+                    .header {
+                        background-color: #27548A;
+                        color: white;
+                    }
+
+                    .row {
+                        cursor: pointer;
+                    }
+
+                    .row:hover {
+                        background-color: #A9B5DF;
+                    }
+                }
+            }
+        }
+    }
+}

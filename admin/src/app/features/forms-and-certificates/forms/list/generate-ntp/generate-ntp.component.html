@@ -1,0 +1,121 @@
+<mat-card id="main-card">
+  <div id="header-container">
+    <h2>E-Learning NOTICE OF PARTICIPATION</h2>
+    <h3>
+      METALS INDUSTRY RESEARCH AND DEVELOPMENT CENTER - Finance and Administrative
+      Division
+    </h3>
+  </div>
+
+  <div>
+    <p><strong>Program Title: {{ programName }}</strong></p>
+    <p>
+      <strong>Schedule/Time:</strong>
+      {{ fromDate | date: 'MMMM d, y' }} - {{ toDate | date: 'MMMM d, y' }}
+    </p>
+    <p>
+      <strong>PRIVACY STATEMENT:</strong>
+      In submitting this form I agree to the processing of my personal information to
+      document my attendance to the learning and development program conducted by the
+      Center. The information will only be accessed and processed by authorized
+      personnel in accordance with the Privacy Policy Manual of the Center.
+    </p>
+    <p>
+      <strong>
+        For those who are interested and/or identified as participants to attend the
+        above-stated program, please fill-out details below.
+      </strong>
+    </p>
+
+    <p>
+      <strong>
+        All RESPONSES shall be accepted until
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Choose a date"
+            [(ngModel)]="dueDate"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </strong>
+    </p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <br />
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+      <th mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.lastname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="first_name">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.firstname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="middle_i">
+      <th mat-header-cell *matHeaderCellDef>M.I</th>
+      <td mat-cell *matCellDef="let element">{{ element.middle_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="division">
+      <th mat-header-cell *matHeaderCellDef>Division</th>
+      <td mat-cell *matCellDef="let element">{{ element.divName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="participant_confirmation">
+      <th mat-header-cell *matHeaderCellDef>Participant Confirmation</th>
+      <td mat-cell *matCellDef="let element">{{ element.participant_confirmation }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date_of_approval">
+      <th mat-header-cell *matHeaderCellDef>Date of Approval</th>
+      <td mat-cell *matCellDef="let element">{{ element.date_of_approval }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="divchief_approval">
+      <th mat-header-cell *matHeaderCellDef>DivChief Approval</th>
+      <td mat-cell *matCellDef="let element">{{ element.divchief_approval }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="div_chief">
+      <th mat-header-cell *matHeaderCellDef>Division Chief</th>
+      <td mat-cell *matCellDef="let element">{{ element.divchiefName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="remarks">
+      <th mat-header-cell *matHeaderCellDef>Remarks</th>
+      <td mat-cell *matCellDef="let element">{{ element.remarks }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <br />
+  <mat-divider></mat-divider>
+  <br />
+
+  <mat-card-actions align="end">
+    <button (click)="onClose()" mat-button color="warn" style="color: red !important; background-color: transparent;">Close</button>
+     <button mat-button color="primary" class="mat-elevation-z2" (click)="sendNTP()">
+    Send
+  </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,26 @@
+<mat-toolbar class="header">
+    <div id="title">  
+        <div class="logo">
+            <img src="/mirdclogo.png">
+        </div>
+        <div id="description">
+            <p class="tag">Republic of the Philippines</p>
+            <p class="name">Metals Industry Research and Development Center</p>
+            <p class="tag">Department of Science and Technology</p>
+        </div>
+    </div>
+    
+    <div class="menu">
+        <div class="time-container">
+            <p class="time">
+                <span>Philippine Time :</span>
+                {{ today | date:'EEEE , MMMM d , y , h:mm a' }}
+            </p>
+        </div>
+        <mat-divider vertical></mat-divider>   
+        <button mat-icon-button aria-label="Example icon-button with menu icon" (click)="viewNotifications()">
+            <mat-icon>list</mat-icon>
+        </button>
+    </div>  
+</mat-toolbar>
+

@@ -1,0 +1,37 @@
+<div class="dialog-wrapper">
+  <mat-dialog-content class="view-cert-content">
+    <mat-card class="mat-elevation-z1 view-cert-card">
+      <div class="dialog-header">
+        <mat-card-title>Certificate Description</mat-card-title>
+        <button mat-icon-button class="close-button" (click)="closeDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+
+      <form [formGroup]="requestFormGroup" (ngSubmit)="submit()" class="cert-form">
+        <div class="input-container-control">
+          <mat-form-field appearance="fill" class="form-remarks">
+            <mat-label>Remarks</mat-label>
+            <input matInput formControlName="remarks" required />
+          </mat-form-field>
+        </div>
+
+        <div id="read-only-content">
+          @if (pdf) {
+            <iframe [src]="pdf" class="pdf-viewer"></iframe>
+          } @else {
+            <div class="no-pdf">No PDF available to display</div>
+          }
+        </div>
+
+        @if (isforDivApproval) {
+          <div class="button-container">
+            <button mat-stroked-button color="primary" type="submit">Approve</button>
+            <button mat-stroked-button color="warn" type="button" (click)="reject()">Reject</button>
+          </div>
+        }
+      </form>
+    </mat-card>
+  </mat-dialog-content>
+</div>

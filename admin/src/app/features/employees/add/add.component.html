@@ -1,0 +1,126 @@
+<h2 matDialogTitle class="dialog-title">Add Subject Matter Expert</h2>
+
+<mat-dialog-content class="form-content">
+    <mat-horizontal-stepper linear #stepper>
+        <!-- Step 1 -->
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup" class="form-container">
+                <ng-template matStepLabel>First Information</ng-template>
+
+                <!-- Step 1 Content -->
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstName" required>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Middle Name</mat-label>
+                        <input matInput formControlName="middleName">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastName" required>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="form-field full-width">
+                        <mat-label>Age</mat-label>
+                        <input matInput formControlName="source">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="form-field full-width">
+                        <mat-label>Religion</mat-label>
+                        <input matInput formControlName="source">
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- Step 2 -->
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup" class="form-container">
+                <ng-template matStepLabel>Second Information</ng-template>
+
+                <!-- Step 2 Content -->
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Gender</mat-label>
+                        <mat-select>
+                            @for (genders of genders; track genders) {
+                            <mat-option [value]="genders.value">{{genders.value}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div class="form-field"
+                        style="display: flex; flex-direction: column; justify-content: start; align-items: center;">
+                        <label class="form-label" style="margin-bottom: 4px;">With Medical Condition</label>
+                        <mat-radio-group style="display: flex; gap: 12px;">
+                            <mat-radio-button value="yes">Yes</mat-radio-button>
+                            <mat-radio-button value="no">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <mat-form-field appearance="outline" class="form-field full-width">
+                        <mat-label>Email Address</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <mat-form-field appearance="outline" class="form-field full-width">
+                        <mat-label>Division</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field full-width">
+                        <mat-label>Position</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Employment Status</mat-label>
+                        <mat-select>
+                            @for (employees of employees; track employees) {
+                            <mat-option [value]="employees.value">{{employees.value}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" *ngIf="stepperStepsCount > 0">
+    <button mat-button (click)="onClose()" color="warn" style="color: red;">Close</button>
+
+    <!-- Back button -->
+    <button mat-fab extended (click)="stepper.previous()" *ngIf="stepper.selectedIndex > 0">
+        Back
+    </button>
+
+    <!-- Next button -->
+    <button mat-fab extended *ngIf="stepper.selectedIndex < stepper.steps.length - 1" [disabled]="!firstFormGroup.valid"
+        (click)="stepper.next()">
+        Next
+    </button>
+
+    <!-- Submit button -->
+    <button mat-fab extended color="primary" *ngIf="stepper.selectedIndex === stepper.steps.length - 1"
+        [disabled]="!secondFormGroup.valid" (click)="onSubmit()">
+        Submit
+    </button>
+</mat-dialog-actions>

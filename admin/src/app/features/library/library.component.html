@@ -1,0 +1,47 @@
+<div id="content">
+
+  <div id="view">
+    <mat-button-toggle-group appearance="legacy" [hideSingleSelectionIndicator]="true" [value]="gridView ? 'grid' : 'list'" exclusive>
+      <mat-button-toggle style="border-radius: 0;" value="grid" (click)="toggleViewG()" matTooltip="Grid View">
+        <mat-icon>grid_view</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle style="border-radius: 0;" value="list" (click)="toggleViewL()" matTooltip="List View">
+        <mat-icon>view_list</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="library" *ngIf="gridView">
+    <mat-card class="mat-elevation-z1" *ngFor="let card of libraryCards" (click)="goTo(card.route)" style="cursor: pointer;"> 
+      <mat-card-header>
+        <mat-card-subtitle>
+          <mat-icon>{{ card.icon }}</mat-icon>
+          {{ card.title }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <div class="displayed-img">
+      <img mat-card-image [src]="card.image" [alt]="card.description" class="mat-elevation-z5">
+      </div>
+      <!-- <mat-card-content>
+        <p>{{ card.description }}</p>
+      </mat-card-content> -->
+    </mat-card>
+  </div>
+
+  <div id="listview" *ngIf="!gridView">
+    <div class="list" *ngFor="let card of libraryCards" (click)="goTo(card.route)">
+      <div class="description">
+        <img width="10%" mat-card-image [src]="card.image" [alt]="card.description" class="mat-elevation-z8">
+        <!-- <div class="name">
+          <span>{{ card.description }}</span>
+          <p>{{ card.title }}</p>
+        </div> -->
+      </div>
+      <div class="view_all">
+        <p>View</p>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+
+</div>

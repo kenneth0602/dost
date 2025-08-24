@@ -1,0 +1,177 @@
+<h2 matDialogTitle class="dialog-title">Add Subject Matter Expert</h2>
+
+<mat-dialog-content class="form-content">
+  <mat-dialog-actions align="end" style="margin-bottom: 8px; padding: 0;">
+    <button mat-stroked-button color="primary" (click)="toggleEdit()">
+      <mat-icon>{{ isDisabled ? 'edit' : 'edit_off' }}</mat-icon>
+      {{ isDisabled ? 'Enable Editing' : 'Disable Editing' }}
+    </button>
+
+    @if (data?.status === 'Active') {
+      <button mat-stroked-button color="warn" (click)="deactivateSME()">
+        <mat-icon>block</mat-icon> Deactivate
+      </button>
+    } @else {
+      <button mat-stroked-button color="primary" (click)="activateSME()">
+        <mat-icon>check_circle</mat-icon> Activate
+      </button>
+    }
+  </mat-dialog-actions>
+  <mat-horizontal-stepper linear #stepper>
+    <!-- Step 1 -->
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" class="form-container">
+        <ng-template matStepLabel>Basic Information</ng-template>
+
+        <!-- Step 1 Content -->
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstname" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Middle Name</mat-label>
+            <input matInput formControlName="middlename">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastname" required>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Training Providery</mat-label>
+            <mat-select formControlName="provID" placeholder="Please select training provider">
+                @for (status of dataSource; track status.provID) {
+                <mat-option [value]="status.provID">{{status.providerName}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Source</mat-label>
+            <mat-select formControlName="resource" placeholder="Please select proficiency">
+              @for (status of resource; track resource) {
+              <mat-option [value]="status.value">{{status.value}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Company</mat-label>
+            <input matInput formControlName="companyName">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Company Address</mat-label>
+            <input matInput formControlName="companyAddress">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Company Number</mat-label>
+            <input matInput formControlName="companyNo">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Other Affiliations</mat-label>
+            <input matInput formControlName="affiliation">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput formControlName="mobileNo">
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 2 -->
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup" class="form-container">
+        <ng-template matStepLabel>Contact & Expertise</ng-template>
+
+        <!-- Step 2 Content -->
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Telephone Number</mat-label>
+            <input matInput formControlName="telNo">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Website</mat-label>
+            <input matInput formControlName="website">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email Address</mat-label>
+            <input matInput formControlName="emailAdd">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>FB Messenger</mat-label>
+            <input matInput formControlName="fbMessenger">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Viber Account</mat-label>
+            <input matInput formControlName="viberAccount">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Area of Expertise</mat-label>
+            <input matInput formControlName="areaOfExpertise">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Honoraria Rate per man-hour</mat-label>
+            <input matInput formControlName="honorariaRate">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>TIN</mat-label>
+            <input matInput formControlName="TIN">
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" *ngIf="stepperStepsCount > 0">
+  <button mat-button (click)="onClose()" color="warn" style="color: red;">Close</button>
+
+  <!-- Back button -->
+  <button mat-fab extended (click)="stepper.previous()" *ngIf="stepper.selectedIndex > 0">
+    Back
+  </button>
+
+  <!-- Next button -->
+  <button mat-fab extended
+          *ngIf="stepper.selectedIndex < stepper.steps.length - 1"
+          [disabled]="!firstFormGroup.valid"
+          (click)="stepper.next()">
+    Next
+  </button>
+
+  <!-- Submit button -->
+  <button mat-fab extended
+          color="primary"
+          *ngIf="stepper.selectedIndex === stepper.steps.length - 1"
+          [disabled]="!secondFormGroup.valid"
+          (click)="onSubmit()">
+    Submit
+  </button>
+</mat-dialog-actions>
+

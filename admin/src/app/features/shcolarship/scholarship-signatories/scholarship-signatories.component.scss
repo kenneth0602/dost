@@ -1,0 +1,39 @@
+/* signatories-dialog.component.scss */
+.sig-content {
+  display: grid;
+  gap: 16px;
+}
+
+.row.two {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+.row.one {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+.members-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .title { font-weight: 600; }
+}
+
+.members {
+  display: grid;
+  gap: 10px;
+}
+
+.member-row {
+  display: grid;
+  grid-template-columns: 1fr 320px 40px;
+  gap: 10px;
+  align-items: center;
+}
+
+.grow { width: 100%; }
+
+.sig-actions { padding-top: 4px; }

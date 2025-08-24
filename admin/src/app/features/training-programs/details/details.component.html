@@ -1,0 +1,107 @@
+<mat-card class="header">
+    <div class="main-container">
+        <div class="img-container">
+            <img src="SME-DETAILS.png" alt="header-image" width="25%">
+            <div>
+                <h1 style="font-size: 25px;">{{ training_program_data?.programName }}</h1>
+
+                <span style="font-size: 15px;">
+                    <p style="display: flex; align-items: center;">Description:
+                        {{ training_program_data?.Description }}</p>
+                </span>
+            </div>
+        </div>
+        <!-- <mat-card-actions class="actions" align="end">
+            <button (click)="view()" mat-fab extended><mat-icon>edit</mat-icon>Edit</button>
+        </mat-card-actions> -->
+    </div>
+</mat-card>
+
+<div class="card-container">
+    <mat-card class="card-width">
+        <mat-card-header>
+            <mat-card-title>Training Providers</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <button mat-fab extended (click)="addTrainingProvider()">
+                <mat-icon>add_circle</mat-icon>
+                Add Provider
+            </button>
+            <table mat-table [dataSource]="providerDataSource" class="mat-elevation-z2 full-width-table">
+
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation(); onSelectRow(row)"
+                            [checked]="selection.isSelected(row)" aria-label="Select row">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <!-- Provider Name Column -->
+                <ng-container matColumnDef="providerName">
+                    <th mat-header-cell *matHeaderCellDef> Provider Name </th>
+                    <td mat-cell *matCellDef="let provider"> {{ provider.providerName }} </td>
+                </ng-container>
+
+                <!-- Point of Contact Column -->
+                <ng-container matColumnDef="pointofContact">
+                    <th mat-header-cell *matHeaderCellDef> Point of Contact </th>
+                    <td mat-cell *matCellDef="let provider"> {{ provider.pointofContact }} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="providerDisplayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: providerDisplayedColumns;"></tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+        <mat-card-header>
+            <mat-card-title>Availability</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <button mat-fab extended (click)="addTrainingSchedule()">
+                <mat-icon>add_circle</mat-icon>
+                Add Provider
+            </button>
+            <ng-container *ngIf="availabilityData.length > 0; else noData">
+                <table mat-table [dataSource]="availabilityData" class="full-width-table mat-elevation-z1">
+
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef>Date</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.dateFrom | date: 'MMM d, y' }} - {{ element.dateTo | date: 'MMM d, y' }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="time">
+                        <th mat-header-cell *matHeaderCellDef>Time</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.fromTime }} - {{ element.toTime }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cost">
+                        <th mat-header-cell *matHeaderCellDef>Cost</th>
+                        <td mat-cell *matCellDef="let element">₱{{ element.cost | number }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>Status</th>
+                        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="['date', 'time', 'cost', 'status']"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['date', 'time', 'cost', 'status']"></tr>
+                </table>
+            </ng-container>
+
+            <ng-template #noData>
+                <p>No availability data.</p>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</div>

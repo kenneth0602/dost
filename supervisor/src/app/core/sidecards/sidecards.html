@@ -1,0 +1,42 @@
+<div class="dialog-wrapper">
+  <div mat-dialog-title class="dialog-header">
+    <button (click)="closeDialog()" mat-icon-button color="warn">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-body">
+    <mat-dialog-content class="content-scrollable">
+      <div id="sidecard">
+        <!-- Avatar / Profile Section -->
+        <div class="settings">
+          <div class="avatar">
+            <mat-icon style="font-size: 55px;">account_circle</mat-icon>
+            <span>{{this.username}}</span>
+            <input id="fileInput" type='file'>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <h1 style="display: flex; align-items: center;"><mat-icon
+            style="font-size: 40px;">notifications</mat-icon>Notifications</h1>
+        <mat-divider></mat-divider>
+
+        @for (notif of notifications; track notif) {
+        <mat-card class="side-card">
+          <p class="source_module">{{notif.source_module}}</p>
+          <div class="news">
+            <p style="margin: 0;">{{notif.message}}</p>
+          </div>
+        </mat-card>
+        }
+
+      </div>
+    </mat-dialog-content>
+
+    <div mat-dialog-actions>
+      <button style="width: 100%; background: #FB4141; color: white; border-radius: 10px;" mat-raised-button
+        color="warn" (click)="logout()"><mat-icon>logout</mat-icon>Logout</button>
+    </div>
+  </div>
+</div>

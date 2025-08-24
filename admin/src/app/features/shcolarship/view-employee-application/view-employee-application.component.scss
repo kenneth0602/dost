@@ -1,0 +1,48 @@
+.dialog-title {
+    background-color: #27548A;
+    color: white;
+    margin-bottom: 2%;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.form-field {
+    flex: 1;
+    min-width: 200px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+ .date-range-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .date-range-container mat-form-field {
+    flex: 1;
+  }
+  
+  .section-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+.sub-form-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+

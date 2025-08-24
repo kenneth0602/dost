@@ -1,0 +1,38 @@
+.header {
+    margin-top: 2%;
+
+    .main-container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .img-container {
+            display: flex;
+            align-items: center;
+            width: 50%;
+            gap: 10%;
+        }
+
+        .actions {
+            gap: 5%;
+
+            .delete-button {
+                background-color: red;
+                color: white;
+            }
+        }
+    }
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    .card-width {
+        width: 50%;
+    }
+}

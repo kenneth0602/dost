@@ -1,0 +1,87 @@
+<h2 matDialogTitle class="dialog-title">Eligible Employee for Scholarship grant - {{this.status}}</h2>
+<div class="handle-form">
+    <!-- <button mat-stroked-button color="primary" (click)="toggleForm()">
+        {{ isDisabled ? 'Enable Form' : 'Disable Form' }}
+    </button> -->
+</div>
+
+<mat-dialog-content>
+    @if(!showEmployeeSelection) {
+    <form class="form-container" [formGroup]="scholarshipForm">
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Employee Name</mat-label>
+                <input readonly formControlName="employeeName" matInput placeholder="Please enter employee name">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Title</mat-label>
+                <input readonly formControlName="title" matInput placeholder="Please enter the title">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field full-width">
+                <mat-label>Category</mat-label>
+                <input readonly formControlName="category" matInput placeholder="Please enter category">
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field full-width">
+                <mat-label>Supervisor</mat-label>
+                <input readonly formControlName="supervisor" matInput placeholder="Please enter employee supervisor">
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="form-row">
+            <div class="upload-dropzone" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)"
+                (dragleave)="onDragLeave($event)" [class.dragover]="isDragOver">
+                <mat-icon fontIcon="upload_file"></mat-icon>
+                <p>Drop a file here or <a (click)="fileInput.click()">browse</a> your files</p>
+                <input #fileInput type="file" hidden (change)="onFileSelected($event)" />
+            </div>
+            @if (selectedFile) {
+            <div style="width: 100%;">
+                <p style="text-align: center;"><strong>Selected File:</strong> {{ selectedFile.name }}</p>
+            </div>
+            }
+        </div> -->
+
+    </form>
+    }
+
+    @if (showEmployeeSelection) {
+    <div>
+        <h3>Select Employees to Assign</h3>
+        <table mat-table [dataSource]="employees" class="mat-elevation-z8" multiTemplateDataRows>
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="toggleSelectAll($event)" [checked]="isAllSelected()">All</mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (change)="toggleSelection(row.id)" [checked]="isSelected(row.id)"></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['select', 'name']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['select', 'name'];"></tr>
+        </table>
+    </div>
+    }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <!-- <button mat-fab extended (click)="onUpload()" style="background-color: #FF3F33; color: white;">Reject</button> -->
+    <button mat-fab extended (click)="notifyScholarshipToSupervisor()">Notify Employee Supervisor</button>
+</mat-dialog-actions>

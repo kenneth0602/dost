@@ -1,0 +1,60 @@
+.dialog-title {
+    background-color: #27548A;
+    color: white;
+    margin-bottom: 2%;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.handle-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 2%;
+    gap: 2%;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.form-field {
+    flex: 1;
+    min-width: 200px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.upload-dropzone {
+    width: 100%;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-dropzone.dragover {
+    background-color: #e3f2fd;
+    border-color: #1976d2;
+}
+
+.upload-dropzone p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.upload-dropzone a {
+    color: #1976d2;
+    cursor: pointer;
+    text-decoration: underline;
+}

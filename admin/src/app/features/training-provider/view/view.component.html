@@ -1,0 +1,72 @@
+<h2 matDialogTitle class="dialog-title">Training Provider Details</h2>
+
+<mat-dialog-content>
+  <mat-dialog-actions align="end" style="margin-bottom: 8px; padding: 0;">
+    <button mat-stroked-button color="primary" (click)="toggleEdit()">
+      <mat-icon>{{ isDisabled ? 'edit' : 'edit_off' }}</mat-icon>
+      {{ isDisabled ? 'Enable Editing' : 'Disable Editing' }}
+    </button>
+
+    @if (data?.status === 'Active') {
+      <button mat-stroked-button color="warn" (click)="deactivateProvider()">
+        <mat-icon>block</mat-icon> Deactivate
+      </button>
+    } @else {
+      <button mat-stroked-button color="primary" (click)="activateProvider()">
+        <mat-icon>check_circle</mat-icon> Activate
+      </button>
+    }
+  </mat-dialog-actions>
+
+  <form class="form-container" [formGroup]="trainingProviderForm">
+        
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Training Provider</mat-label>
+        <input formControlName="providerName" matInput placeholder="Please enter training provider">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Website</mat-label>
+        <input formControlName="website" matInput placeholder="Please enter training provider website">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Address</mat-label>
+        <input formControlName="address" matInput placeholder="Please enter training provider address">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Contact Person</mat-label>
+        <input formControlName="pointofContact" matInput placeholder="Please enter the contact person">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Telephone Number</mat-label>
+        <input formControlName="telNo" matInput placeholder="Please enter contact person's number">
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Mobile Number</mat-label>
+        <input formControlName="mobileNo" matInput placeholder="Please enter contact person's number">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email Address</mat-label>
+        <input formControlName="emailAdd" matInput placeholder="Please enter contact person's email">
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()" style="color: red;">Close</button>
+  <button (click)="onSubmit()" mat-fab extended [disabled]="this.trainingProviderForm.invalid">Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,38 @@
+<div id="sidecard">
+   <div class="settings">
+      <div class="avatar">
+         <label class="hoverable" for="fileInput">
+            <img [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'"> 
+         <div class="hover-text">Choose file</div>
+         <div class="background"></div>
+         </label>
+         <span>Admin</span>
+            <input id="fileInput" type='file' (change)="onSelectFile($event)">
+      </div>
+      <div class="example-button-container">
+         <mat-icon mat-icon-button (click)="logout()">logout</mat-icon>
+      </div>
+   </div>    
+   <mat-divider></mat-divider>    
+   <span>View-all Calendar</span>
+   <mat-divider></mat-divider>
+      <mat-card class="side-card" id="Calendar">
+         <mat-calendar ngSkipHydration></mat-calendar>
+      </mat-card>
+   <span>MIRDC News</span>
+   <mat-divider></mat-divider>
+      <mat-card class="side-card">
+         <div class="news">
+            <mat-icon>campaign</mat-icon>
+               <span>Welcome to MIRDC System</span>
+               <br>
+            <mat-icon>campaign</mat-icon>
+               <span>New trainings Coming Soon</span>
+               <br>
+            <mat-icon>campaign</mat-icon>
+               <span>New Programs & Services</span>
+               <br>
+            </div>
+      </mat-card>
+</div>
+ 

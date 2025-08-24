@@ -1,0 +1,30 @@
+<h2 matDialogTitle class="dialog-title">Upload File</h2>
+
+<mat-dialog-content class="upload-content">
+  <div
+    class="upload-dropzone"
+    (drop)="onFileDrop($event)"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    [class.dragover]="isDragOver"
+  >
+    <mat-icon fontIcon="upload_file"></mat-icon>
+    <p>Drop a file here or <a (click)="fileInput.click()">browse</a> your files</p>
+    <input #fileInput type="file" hidden (change)="onFileSelected($event)" />
+  </div>
+
+@if (selectedFile) {
+  <div>
+  <p><strong>Selected File:</strong> {{ selectedFile.name }}</p>
+  </div>
+} @else {
+  <div>
+  <p>No file selected yet.</p>
+  </div>
+}
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onClose()" style="color: red;">Close</button>
+    <button mat-fab extended>Upload File</button>
+</mat-dialog-actions>
